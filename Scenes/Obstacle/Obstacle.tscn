@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnlywqxdc0qbj"]
+
+[ext_resource type="PackedScene" uid="uid://c4wi0pvo0r0k4" path="res://Scenes/Pipe/Pipe.tscn" id="1_f02im"]
+[ext_resource type="Script" uid="uid://ds87op5nf07kn" path="res://Scenes/Obstacle/Obstacle.gd" id="1_ko7pw"]
+[ext_resource type="PackedScene" uid="uid://cuhwd36q03dpk" path="res://Scenes/Laser/Laser.tscn" id="2_6ojtx"]
+
+[node name="Obstacle" type="Node2D"]
+script = ExtResource("1_ko7pw")
+
+[node name="Laser" parent="." instance=ExtResource("2_6ojtx")]
+
+[node name="Upper" parent="." instance=ExtResource("1_f02im")]
+z_index = 1
+position = Vector2(0, -100)
+rotation = 3.1415927
+
+[node name="Lower" parent="." instance=ExtResource("1_f02im")]
+z_index = 1
+position = Vector2(0, 100)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(66, 0)
+
+[connection signal="body_entered" from="Upper" to="." method="_on_pipe_body_entered"]
+[connection signal="body_entered" from="Lower" to="." method="_on_pipe_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_2d_screen_exited"]

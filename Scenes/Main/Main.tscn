@@ -1,0 +1,136 @@
+[gd_scene load_steps=11 format=3 uid="uid://c1qrpc1gc1kpb"]
+
+[ext_resource type="Texture2D" uid="uid://b6dgesq8c6xgh" path="res://Assets/background/sky.png" id="1_i3fi7"]
+[ext_resource type="Script" uid="uid://dpa6dcrxd6ey4" path="res://Scenes/Main/Main.gd" id="1_o8wgc"]
+[ext_resource type="LabelSettings" uid="uid://hvbnjerqyg4l" path="res://Resources/Fonts/lucki_red_64.tres" id="2_o8wgc"]
+[ext_resource type="FontFile" uid="uid://c16mjqp4xf1wb" path="res://Assets/fonts/LuckiestGuy-Regular.ttf" id="3_w20t6"]
+[ext_resource type="LabelSettings" uid="uid://d27sr4a2hqyse" path="res://Resources/Fonts/lucki_white_42.tres" id="4_aw1lf"]
+[ext_resource type="AudioStream" uid="uid://buu1ficv2bu3o" path="res://Assets/audio/bgm_menu.mp3" id="6_w20t6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5s61s"]
+font = ExtResource("3_w20t6")
+font_size = 32
+font_color = Color(1, 0.34117648, 0.22745098, 1)
+outline_size = 6
+outline_color = Color(0.26557982, 0.01986923, 2.4065375e-08, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="Animation" id="Animation_w20t6"]
+resource_name = "play_flashing"
+length = 0.7
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/PlayLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.49803922)]
+}
+
+[sub_resource type="Animation" id="Animation_aw1lf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/PlayLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5s61s"]
+_data = {
+&"RESET": SubResource("Animation_aw1lf"),
+&"play_flashing": SubResource("Animation_w20t6")
+}
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o8wgc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_i3fi7")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Title" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "TAPPY
+PLANE"
+label_settings = ExtResource("2_o8wgc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "PRESS SPACE
+TO
+PLAY"
+label_settings = ExtResource("4_aw1lf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighscoreTilte" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "HIGHSCORE"
+label_settings = SubResource("LabelSettings_5s61s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Highscore" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0000"
+label_settings = SubResource("LabelSettings_5s61s")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_w20t6")
+volume_db = -30.0
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5s61s")
+}
+autoplay = "play_flashing"
