@@ -1,6 +1,9 @@
 extends Node2D
 
+class_name Game
+
 const OBSTACLE = preload("uid://dnlywqxdc0qbj")
+
 const MARGIN: float = 100.0
 
 @onready var spawn_timer: Timer = $SpawnTimer
@@ -10,10 +13,14 @@ const MARGIN: float = 100.0
 
 static var vp_rect: Rect2
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+func _enter_tree() -> void:
+	SignalHub.on_plane_die.connect(_on_plane_die)
+	
 func _ready() -> void:
 	update_vp_rect()
 	spawn_obstacle()
+
 
 func update_vp_rect() -> void:
 	vp_rect = get_viewport_rect()
@@ -28,5 +35,6 @@ func _on_spawn_timer_timeout() -> void:
 	spawn_obstacle()
 
 
-func _on_plane_dead() -> void:
+func _on_plane_die() -> void:
 	get_tree().paused = true
+	pass

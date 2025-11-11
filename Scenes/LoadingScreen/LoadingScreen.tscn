@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://6qw5g6dar5nn"]
+
+[ext_resource type="Texture2D" uid="uid://b6dgesq8c6xgh" path="res://Assets/background/sky.png" id="1_tgj5j"]
+[ext_resource type="Script" uid="uid://cb12bqyh7ym17" path="res://Scenes/LoadingScreen/LoadingScreen.gd" id="1_th1ok"]
+[ext_resource type="LabelSettings" uid="uid://hvbnjerqyg4l" path="res://Resources/Fonts/lucki_red_64.tres" id="2_th1ok"]
+
+[node name="LoadingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_th1ok")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_tgj5j")
+expand_mode = 5
+
+[node name="LoadingLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.5
+offset_top = -41.5
+offset_right = 187.5
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "LOADING..."
+label_settings = ExtResource("2_th1ok")
